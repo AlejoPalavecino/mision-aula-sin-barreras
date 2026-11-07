@@ -1,0 +1,55 @@
+name: QA temporal de Google Sheets (registro ficticio único)
+
+on:
+  push:
+    branches:
+      - feat/post-save-whatsapp-modal
+    paths:
+      - .github/workflows/live-qa-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar guardado real y segundo intento rechazado
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, json, re, pathlib, urllib.request
+          text=pathlib.Path("assets/js/config.js").read_text(encoding="utf-8")
+          endpoint=re.search(r'appsScriptUrl:\s*"([^"]+)"',text).group(1)
+          run_id=os.environ["GITHUB_RUN_ID"]
+          attempt=os.environ["GITHUB_RUN_ATTEMPT"]
+          stamp=run_id+"-"+attempt
+          email=f"qa.modal.{stamp}@example.invalid"
+          def post(data):
+              body=json.dumps(data, ensure_ascii=False).encode("utf-8")
+              req=urllib.request.Request(endpoint,method="POST",data=body,headers={"Content-Type":"text/plain;charset=utf-8","User-Agent":"MisionAulaIntegrationQA/1.0"})
+              with urllib.request.urlopen(req,timeout=50) as response:
+                  result=response.read().decode("utf-8")
+              return json.loads(result)
+          first=post({"action":"checkEmail","email":email,"requestId":"pre-"+stamp})
+          assert first.get("status")=="available",first
+          print("Correo disponible:",email,flush=True)
+          payload={"email":email,
+             "name":"Integracion Modal",
+             "barrier":"Cognitiva: comprensión y organización",
+             "change":"Prueba temporal de guardado con identificador nuevo; se eliminará después",
+             "evidence":"Comprobar que se agregó una fila real y se rechazó un segundo envío",
+             "reflection":"Prueba automatizada del modal, no es una respuesta de un docente",
+             "website":""}
+          saved=post({**payload,"requestId":"save-"+stamp})
+          assert saved.get("status")=="saved",saved
+          print("Respuesta guardada (nuevo requestId): OK",flush=True)
+          duplicate=post({**payload,"requestId":"retry-"+stamp})
+          assert duplicate.get("status")=="duplicate",duplicate
+          print("Segundo envío rechazado: OK",flush=True)
+          again=post({"action":"checkEmail","email":email,"requestId":"check-"+stamp})
+          assert again.get("status")=="duplicate",again
+          print("Correo bloqueado en consulta posterior: OK",flush=True)
+          PY
