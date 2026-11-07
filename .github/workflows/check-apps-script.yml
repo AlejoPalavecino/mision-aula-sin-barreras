@@ -1,0 +1,71 @@
+name: Comprobar receptor de Google Sheets (sin registrar respuestas)
+
+on:
+  push:
+    paths:
+      - .github/workflows/check-apps-script.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-receiver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar acceso al receptor y validación de correo (solo lectura)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib, re
+          config = pathlib.Path("assets/js/config.js").read_text(encoding="utf-8")
+          match = re.search(r'appsScriptUrl:\s*"([^"]+)"', config)
+          assert match and match.group(1).startswith("https://script.google.com/macros/s/")
+          with open("/tmp/url.txt", "w") as f:
+              f.write(match.group(1))
+          payload = {
+              "action": "checkEmail",
+              "email": "qa.mision." + "${GITHUB_RUN_ID}" + "@example.invalid",
+              "requestId": "probe-${GITHUB_RUN_ID}",
+          }
+          # GitHub sustituye GITHUB_RUN_ID en el paso siguiente; construirlo allí.
+          PY
+          python - <<'PY'
+          import json, os
+          run_id = os.environ["GITHUB_RUN_ID"]
+          body = {"action": "checkEmail", "email": f"qa.mision.{run_id}@example.invalid", "requestId": f"probe-{run_id}"}
+          with open("/tmp/probe.json","w") as f:
+              json.dump(body,f)
+          PY
+          URL="$(cat /tmp/url.txt)"
+          echo "Probando Apps Script con una consulta de correo inexistente, sin guardar filas."
+          curl --fail-with-body --location --silent --show-error --max-time 35 \
+            -H 'Content-Type: text/plain;charset=utf-8' \
+            --data-binary @/tmp/probe.json "$URL" -o /tmp/post_result
+          python - <<'PY'
+          import json
+          body = open('/tmp/post_result',encoding='utf-8').read()
+          try:
+              parsed = json.loads(body)
+          except Exception:
+              print("La respuesta no es JSON:",body[:300])
+              raise
+          assert parsed.get('status') == 'available', "Esperábamos available; recibido: " + str(parsed)
+          print("POST checkEmail: OK (sin datos escritos)")
+          PY
+          CALLBACK="misionProbe"
+          QUERY="${URL}?check=probe-${GITHUB_RUN_ID}&callback=${CALLBACK}"
+          curl --fail-with-body --location --silent --show-error --max-time 35 "$QUERY" -o /tmp/get_result
+          python - <<'PY'
+          import json, re
+          body = open('/tmp/get_result',encoding='utf-8').read()
+          match = re.fullmatch(r'misionProbe\((\{.*\})\);?',body.strip(),re.S)
+          assert match, "La verificación JSONP no tiene el formato esperado: " + body[:200]
+          result=json.loads(match.group(1))
+          assert result.get('status') == 'available', "Estado inesperado: " + str(result)
+          print("GET JSONP verificación: OK")
+          PY
+          echo "Conexión con Google Sheets comprobada; no se guardaron respuestas."
