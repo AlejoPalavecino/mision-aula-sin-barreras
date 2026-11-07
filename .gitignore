@@ -1,0 +1,21 @@
+# Backend fuera del repositorio público
+Code.gs
+*.gs
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.key
+*.credentials*
+*.sqlite
+*.db
+*.log
+__pycache__/
+*.py[cod]
+node_modules/
+.DS_Store
+Thumbs.db
+.coverage
+playwright-report/
+test-results/

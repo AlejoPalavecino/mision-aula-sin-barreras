@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172849">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://script.google.com https://script.googleusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'self'; object-src 'none'; form-action 'none'">
+  <meta name="description" content="Misión Aula Sin Barreras: experiencia educativa interactiva sobre Diseño Universal y Aprendizaje Accesible para docentes de primaria.">
+  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+  <title>Misión Aula Sin Barreras | Videojuego DUA-A</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="Misión Aula Sin Barreras">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.2 20 7.5v9L12 21l-8-4.5v-9L12 3.2Z"/>
+            <path d="m8.3 12.2 2.4 2.4 5-5.2"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <span>Experiencia DUA-A</span>
+          <strong>Misión Aula Sin Barreras</strong>
+        </div>
+      </div>
+      <div class="top-tools">
+        <div class="timer" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="13" r="8.5"/><path d="M12 8v5l3 2M9 2h6"/>
+          </svg>
+          <strong id="clock">00:00</strong>
+          <span>/ 15 min orientativos</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen active" id="intro" aria-labelledby="introTitle">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Desafío para docentes de primaria</p>
+            <h1 id="introTitle">Una clase.<br><span>Muchas formas</span><br>de aprender.</h1>
+            <p class="hero-lead">
+              Tu aula está por comenzar un proyecto sobre el ciclo del agua. Pero no todos pueden acceder,
+              participar y mostrar lo que saben de la misma manera. Tu misión es detectar las barreras, apoyarte en representaciones visuales y
+              rediseñar la experiencia sin bajar la meta de aprendizaje.
+            </p>
+            <div class="tag-row">
+              <span class="tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                15 minutos
+              </span>
+              <span class="tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+                5 desafíos breves
+              </span>
+              <span class="tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4 7v5c0 4.5 3.4 7.5 8 9 4.6-1.5 8-4.5 8-9V7l-8-4Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+                Sin respuestas punitivas
+              </span>
+            </div>
+            <div class="field start-email-field">
+              <label for="startEmail">Tu correo electrónico</label>
+              <span class="field-help">Lo vamos a comprobar antes de comenzar para evitar registros duplicados. Se utiliza únicamente como identificador de participación; no te enviaremos correos.</span>
+              <input id="startEmail" type="email" maxlength="254" autocomplete="email" inputmode="email" placeholder="nombre@correo.com" required>
+            </div>
+            <div class="feedback-box" id="startEmailFeedback" role="status" aria-live="polite">Ingresá tu correo para comprobar que todavía no hayas completado la misión.</div>
+            <button class="primary-btn" id="startBtn" type="button">
+              Validar correo y comenzar
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="micro-note">La misión dura aproximadamente 15 minutos. El registro final se admite una sola vez por correo electrónico.</p>
+          </div>
+
+          <div class="hero-art" aria-label="Ilustración del ciclo del agua y una clase en construcción">
+            <div class="art-orbit">
+              <img src="./assets/img/hero-water-cycle.svg" alt="Ilustración del ciclo del agua: sol, nube, gotas y una planta" width="440" height="390" loading="eager" decoding="async">
+            </div>
+            <div class="art-caption">
+              <div><strong>La clase es el punto de partida.</strong><span>Observá el contexto, no etiquetes a las personas.</span></div>
+              <div class="orbit-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-strip">
+          <div class="mission-cell"><span>Tu objetivo</span><strong>Que todo el grupo pueda explicar el ciclo del agua.</strong><p>La meta de aprendizaje se mantiene.</p></div>
+          <div class="mission-cell"><span>Tu recorrido</span><strong>Detectar · facilitar · procesar · expresar.</strong><p>Cuatro llaves para abrir la experiencia.</p></div>
+          <div class="mission-cell"><span>Tu resultado</span><strong>Una mini propuesta para llevar al aula.</strong><p>Al final podrás descargar tu ficha de diseño.</p></div>
+        </div>
+      </section>
+
+      <section class="screen" id="game" aria-labelledby="stageTitle">
+        <div class="game-card">
+          <div class="game-heading">
+            <div>
+              <div class="stage-kicker"><span class="dot"></span><span id="stageEyebrow">Misión 1 · Radar del grupo</span></div>
+              <h2 id="stageTitle">Detectá las barreras</h2>
+              <p class="stage-description" id="stageDescription">Conocé al grupo y observá qué aspectos del contexto pueden limitar su participación.</p>
+            </div>
+            <div class="stage-count" id="stageCount">1 de 5</div>
+          </div>
+
+          <div class="journey" aria-label="Progreso de la misión">
+            <div class="journey-top"><span>Tu recorrido</span><span id="progressText">20% completado</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="step-list" id="stepList">
+              <div class="step-item active"><span class="step-number">1</span><span>Detectar</span></div>
+              <div class="step-item"><span class="step-number">2</span><span>Acceder</span></div>
+              <div class="step-item"><span class="step-number">3</span><span>Pensar</span></div>
+              <div class="step-item"><span class="step-number">4</span><span>Expresar</span></div>
+              <div class="step-item"><span class="step-number">5</span><span>Reflexionar</span></div>
+            </div>
+          </div>
+
+          <section class="stage-panel active" id="stage1" aria-labelledby="s1title">
+            <div class="panel-banner">
+              <div class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5M10.8 7.5v3.7l2.4 1.4"/></svg>
+              </div>
+              <div><strong>Primero, conocé a tu grupo.</strong><p>Leé las cuatro situaciones. En cada una, identificá qué aspecto del entorno está creando una barrera para participar y aprender.</p></div>
+            </div>
+
+            <details class="hint-dropdown">
+              <summary>¿Necesitás una pista? Abrí esta ayuda</summary>
+              <p>No busques una característica de la persona. Observá qué está dificultando la actividad:</p>
+              <ul>
+                <li><strong>Física:</strong> llegar, desplazarse o manipular materiales.</li>
+                <li><strong>Sensorial:</strong> percibir la información por una o más vías.</li>
+                <li><strong>Cognitiva:</strong> comprender, recordar u organizar la consigna.</li>
+                <li><strong>Emocional:</strong> sentirse seguro, competente y parte del grupo.</li>
+              </ul>
+            </details>
+
+            <div class="instruction-line">
+              <h3 id="s1title">Paso 1. Elegí un perfil del grupo</h3>
+              <span class="small-counter" id="matchCounter">0 de 4 identificadas</span>
+            </div>
+            <div class="profile-grid profile-grid-wide" id="profileGrid">
+              <button class="profile-card" type="button" data-profile="0" aria-pressed="false">
+                <div class="profile-top"><span class="avatar">EM</span><strong>Emi</strong><span class="profile-status" id="status0">Elegir</span></div>
+                <p><b>Fortaleza:</b> comprende muy bien al escuchar y manipular modelos.</p>
+                <p><b>Situación:</b> no distingue el texto pequeño proyectado y la explicación llega solo por escrito.</p>
+              </button>
+              <button class="profile-card" type="button" data-profile="1" aria-pressed="false">
+                <div class="profile-top"><span class="avatar">TO</span><strong>Tomi</strong><span class="profile-status" id="status1">Elegir</span></div>
+                <p><b>Fortaleza:</b> aporta ideas originales y encuentra soluciones.</p>
+                <p><b>Situación:</b> pierde el hilo cuando recibe muchos pasos de una sola vez y sin una guía visible.</p>
+              </button>
+              <button class="profile-card" type="button" data-profile="2" aria-pressed="false">
+                <div class="profile-top"><span class="avatar">AL</span><strong>Alma</strong><span class="profile-status" id="status2">Elegir</span></div>
+                <p><b>Fortaleza:</b> comparte buenas ideas cuando trabaja en pareja.</p>
+                <p><b>Situación:</b> evita participar frente a todo el grupo porque teme equivocarse.</p>
+              </button>
+              <button class="profile-card" type="button" data-profile="3" aria-pressed="false">
+                <div class="profile-top"><span class="avatar">BR</span><strong>Bruno</strong><span class="profile-status" id="status3">Elegir</span></div>
+                <p><b>Fortaleza:</b> se implica mucho al experimentar y construir.</p>
+                <p><b>Situación:</b> los materiales están en un estante alto y el espacio entre mesas es reducido.</p>
+              </button>
+            </div>
+
+            <div class="dimension-box dimension-box-wide">
+              <div class="dimension-heading">
+                <h4>Paso 2. Ahora elegí la barrera</h4>
+                <p>Primero seleccioná un perfil de arriba. Después, marcá una de estas cuatro dimensiones. La devolución aparecerá debajo.</p>
+              </div>
+              <div class="dimension-list dimension-grid">
+                <button class="dimension-btn" type="button" data-dimension="fisica"><strong>Física</strong><small>¿Puede llegar, desplazarse y alcanzar o manipular los materiales?</small></button>
+                <button class="dimension-btn" type="button" data-dimension="sensorial"><strong>Sensorial</strong><small>¿Puede percibir la información con claridad por las vías ofrecidas?</small></button>
+                <button class="dimension-btn" type="button" data-dimension="cognitiva"><strong>Cognitiva</strong><small>¿Puede comprender la consigna y organizar los pasos de la actividad?</small></button>
+                <button class="dimension-btn" type="button" data-dimension="emocional"><strong>Emocional</strong><small>¿Se siente seguro, capaz y parte del grupo para participar?</small></button>
+              </div>
+            </div>
+            <div class="feedback-box" id="matchFeedback" role="status" aria-live="polite">Elegí un perfil y luego identificá la barrera que aparece en esa situación.</div>
+
+            <div class="stage-actions">
+              <span class="action-note">Podés cambiar de perfil antes de identificarlo. No hay penalización por probar.</span>
+              <button class="primary-btn" id="next1" type="button" disabled>Continuar →</button>
+            </div>
+          </section>
+
+          <section class="stage-panel" id="stage2" aria-labelledby="s2title">
+            <div class="panel-banner">
+              <div class="panel-icon" style="background:var(--blue)" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5M8 16h3"/></svg>
+              </div>
+              <div><strong>Tu misión: que todos puedan acceder al mismo contenido.</strong><p>Vas a enseñar el ciclo del agua. La meta no cambia; vas a revisar cómo presentás la información y cómo organizás el entorno para que el grupo pueda acceder.</p></div>
+            </div>
+
+            <div class="task-steps" aria-label="Cómo resolver este desafío">
+              <div class="task-step"><b>1</b><span>Leé cada propuesta.</span></div>
+              <div class="task-step"><b>2</b><span>Marcá las que quitan barreras.</span></div>
+              <div class="task-step"><b>3</b><span>Comprobá tu selección.</span></div>
+            </div>
+
+            <div class="instruction-line">
+              <h3 id="s2title">¿Qué cambios harías en esta clase?</h3>
+              <span class="small-counter" id="accessCounter">0 seleccionadas</span>
+            </div>
+            <p class="choice-hint">Tocá las tarjetas que sí ayudarían a estos estudiantes. Podés elegir varias. Hay propuestas que facilitan el acceso y otras que mantienen o agregan barreras.</p>
+
+            <div class="choice-grid" id="accessGrid">
+              <button class="choice-card" type="button" data-access="a1" data-correct="true" aria-pressed="false">
+                <span class="scenario-label">PARA EMI · ACCESO SENSORIAL</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></span><strong>Ampliar y explicar</strong></div>
+                <p>Usar texto grande y claro, imágenes visibles y una explicación oral que describa las etapas.</p>
+              </button>
+              <button class="choice-card" type="button" data-access="a2" data-correct="true" aria-pressed="false">
+                <span class="scenario-label">PARA TOMI · ACCESO COGNITIVO</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h14M7 12h14M7 20h14"/><circle cx="3.5" cy="4" r="1.5"/><circle cx="3.5" cy="12" r="1.5"/><circle cx="3.5" cy="20" r="1.5"/></svg></span><strong>Mostrar los pasos</strong></div>
+                <p>Dividir la consigna en tres pasos numerados y acompañarlos con una secuencia visual.</p>
+              </button>
+              <button class="choice-card" type="button" data-access="a3" data-correct="true" aria-pressed="false">
+                <span class="scenario-label">PARA ALMA · ACCESO EMOCIONAL</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM16 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM2 21c0-4 2-6 6-6s6 2 6 6"/></svg></span><strong>Dar una entrada gradual</strong></div>
+                <p>Permitir ensayar primero en pareja y luego compartir oralmente, con un dibujo o con un audio.</p>
+              </button>
+              <button class="choice-card" type="button" data-access="a4" data-correct="true" aria-pressed="false">
+                <span class="scenario-label">PARA BRUNO · ACCESO FÍSICO</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18M5 20V9h14v11M8 9V5h8v4"/></svg></span><strong>Hacer accesible el espacio</strong></div>
+                <p>Despejar los pasillos y ubicar los materiales en un lugar al que pueda llegar y acceder.</p>
+              </button>
+              <button class="choice-card" type="button" data-access="a5" data-correct="false" aria-pressed="false">
+                <span class="scenario-label">MANTIENE LA BARRERA</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h6"/></svg></span><strong>Entregar la misma ficha sin cambios</strong></div>
+                <p>Conservar el texto pequeño, la consigna extensa y una única forma de presentar la información.</p>
+              </button>
+              <button class="choice-card" type="button" data-access="a6" data-correct="false" aria-pressed="false">
+                <span class="scenario-label">AGREGA SOBRECARGA</span>
+                <div class="choice-top"><span class="choice-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="m10 8 5 4-5 4V8Z"/></svg></span><strong>Sumar estímulos al mismo tiempo</strong></div>
+                <p>Usar un video con música fuerte, textos pequeños, animaciones rápidas y muchas instrucciones juntas.</p>
+              </button>
+            </div>
+
+            <div class="instruction-note"><strong>Recordá:</strong> no estás eligiendo actividades diferentes para cada estudiante. Estás anticipando opciones y quitando obstáculos para que todos puedan participar de la misma propuesta.</div>
+            <div class="feedback-box" id="accessFeedback" role="status" aria-live="polite">Marcá al menos tres propuestas que reduzcan barreras. Podés volver a tocar una tarjeta para desmarcarla.</div>
+            <div class="stage-actions">
+              <details class="hint-dropdown" style="margin:0; flex:1">
+                <summary>Ver una pista</summary>
+                <p>Buscá propuestas que amplíen las vías para percibir la información, aclaren los pasos, ofrezcan seguridad para participar y faciliten el uso del espacio y los materiales.</p>
+              </details>
+              <button class="primary-btn" id="check2" type="button">Comprobar selección</button>
+              <button class="primary-btn" id="next2" type="button" hidden>Continuar →</button>
+            </div>
+          </section>
+
+          <section class="stage-panel" id="stage3" aria-labelledby="s3title">
+            <div class="panel-banner">
+              <div class="panel-icon" style="background:var(--violet)" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7c.7.5 1 1.1 1 1.8h6c0-.7.3-1.3 1-1.8A7 7 0 0 0 12 3Z"/><path d="M9 21h6M9.5 18h5"/></svg>
+              </div>
+              <div><strong>Ahora investigá qué hace pensar al grupo.</strong><p>Procesar la información no es solamente recibirla o repetirla: es observar, relacionar, organizar, comparar, explicar y usar lo aprendido.</p></div>
+            </div>
+
+            <div class="visual-scene" aria-label="Secuencia visual del ciclo del agua">
+              <div class="visual-hero-card">
+                <div class="visual-svg-wrap">
+                  <svg viewBox="0 0 520 230" role="img" aria-label="El agua se evapora, forma nubes y vuelve como lluvia">
+                    <rect x="8" y="8" width="504" height="214" rx="22" fill="#f8fbff" stroke="#dfe7f2"/>
+                    <circle cx="94" cy="65" r="28" fill="#f3c85b"/>
+                    <g stroke="#e5ad36" stroke-width="4" stroke-linecap="round"><path d="M94 22v-9M94 117v-9M51 65h-9M146 65h-9M64 35l-7-7M131 102l-7-7M124 35l7-7M57 102l7-7"/></g>
+                    <path d="M44 164c42-18 81-18 123 0s81 18 123 0" fill="none" stroke="#42a7d0" stroke-width="13" stroke-linecap="round"/>
+                    <path d="M94 132c-8-18-8-28 0-37M130 132c-8-18-8-28 0-37" fill="none" stroke="#2cae9c" stroke-width="5" stroke-linecap="round" stroke-dasharray="5 7"/>
+                    <path d="M247 75c-15-18-2-39 19-39 7-24 44-27 55-5 24-4 39 14 34 34 24 5 27 37 1 44h-89c-19-1-31-16-20-34Z" fill="#b7d9f5"/>
+                    <path d="M272 126v28M309 126v28M346 126v28" stroke="#3c91c7" stroke-width="5" stroke-linecap="round" stroke-dasharray="5 7"/>
+                    <path d="M410 163c24-12 51-12 76 0" fill="none" stroke="#42a7d0" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M430 136c-7-12-7-20 0-27M463 136c-7-12-7-20 0-27" fill="none" stroke="#2cae9c" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 6"/>
+                    <g fill="#294568" font-size="13" font-family="Lexend Deca, sans-serif" font-weight="700">
+                      <text x="55" y="198">Calor</text><text x="258" y="198">Nube</text><text x="411" y="198">Lluvia</text>
+                    </g>
+                    <path d="M177 93h39m-9-9 9 9-9 9M365 93h31m-9-9 9 9-9 9" fill="none" stroke="#7185a3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="visual-caption">
+                  <h4>El mismo fenómeno, distintas preguntas</h4>
+                  <p>Imaginá que el grupo observa un charco que desaparece después de un día de sol. ¿Qué experiencias, comparaciones y explicaciones pueden ayudar a comprender lo que pasó?</p>
+                  <ul class="visual-bullets">
+                    <li>Relacionar una observación con una idea.</li>
+                    <li>Encontrar semejanzas y diferencias.</li>
+                    <li>Justificar cómo se llegó a una conclusión.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="instruction-line">
+              <h3 id="s3title">Clasificá las cuatro situaciones</h3>
+              <span class="small-counter" id="processCounter">0 de 4 clasificadas</span>
+            </div>
+            <div class="instruction-note"><strong>Cómo jugar:</strong> leé cada tarjeta y elegí una etiqueta. Marcá <strong>AYUDA A PENSAR</strong> si la acción permite relacionar, comparar, organizar o explicar. Marcá <strong>SOLO REPITE</strong> si se limita a copiar o memorizar sin elaborar la información. Clasificá las cuatro tarjetas.</div>
+
+            <div class="process-board" id="processGrid">
+              <article class="process-card" data-process-card="c1" data-answer="procesa">
+                <div class="process-card-top">
+                  <div class="process-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 19c0-3 2-5 4-5s4 2 4 5M13 19c0-3 2-5 4-5s4 2 4 5M10 7h4"/></svg></div>
+                  <div><h4>Dos charcos, dos condiciones</h4><p>Comparan un charco al sol con otro a la sombra y explican cuál se seca primero y por qué.</p></div>
+                </div>
+                <div class="process-status" data-process-status>Sin clasificar</div>
+                <div class="process-choices">
+                  <button class="process-choice" type="button" data-process-choice="procesa" aria-pressed="false">AYUDA A PENSAR</button>
+                  <button class="process-choice" type="button" data-process-choice="repite" aria-pressed="false">SOLO REPITE</button>
+                </div>
+              </article>
+
+              <article class="process-card" data-process-card="c2" data-answer="repite">
+                <div class="process-card-top">
+                  <div class="process-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h8"/></svg></div>
+                  <div><h4>Copiar una definición</h4><p>Copian ocho veces la palabra «evaporación» sin usarla para explicar una situación.</p></div>
+                </div>
+                <div class="process-status" data-process-status>Sin clasificar</div>
+                <div class="process-choices">
+                  <button class="process-choice" type="button" data-process-choice="procesa" aria-pressed="false">AYUDA A PENSAR</button>
+                  <button class="process-choice" type="button" data-process-choice="repite" aria-pressed="false">SOLO REPITE</button>
+                </div>
+              </article>
+
+              <article class="process-card" data-process-card="c3" data-answer="procesa">
+                <div class="process-card-top">
+                  <div class="process-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="8.5" y="15" width="7" height="6" rx="1"/><path d="M10 7h4M12 11v4"/></svg></div>
+                  <div><h4>Ordenar y justificar</h4><p>Ordenan tres imágenes del ciclo del agua y explican qué pistas les permitieron decidir el orden.</p></div>
+                </div>
+                <div class="process-status" data-process-status>Sin clasificar</div>
+                <div class="process-choices">
+                  <button class="process-choice" type="button" data-process-choice="procesa" aria-pressed="false">AYUDA A PENSAR</button>
+                  <button class="process-choice" type="button" data-process-choice="repite" aria-pressed="false">SOLO REPITE</button>
+                </div>
+              </article>
+
+              <article class="process-card" data-process-card="c4" data-answer="repite">
+                <div class="process-card-top">
+                  <div class="process-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
+                  <div><h4>Memorizar palabras sueltas</h4><p>Aprenden una lista de términos de memoria, sin conectarlos con el fenómeno observado.</p></div>
+                </div>
+                <div class="process-status" data-process-status>Sin clasificar</div>
+                <div class="process-choices">
+                  <button class="process-choice" type="button" data-process-choice="procesa" aria-pressed="false">AYUDA A PENSAR</button>
+                  <button class="process-choice" type="button" data-process-choice="repite" aria-pressed="false">SOLO REPITE</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="feedback-box" id="processFeedback" role="status" aria-live="polite">Elegí una etiqueta en cada tarjeta. Podés cambiar tu decisión antes de comprobar.</div>
+            <div class="stage-actions">
+              <details class="hint-dropdown" style="margin:0; flex:1">
+                <summary>Ver una pista</summary>
+                <p>Preguntate qué tiene que hacer el estudiante: ¿comparar, relacionar, justificar y construir una explicación, o solamente repetir una palabra o un texto?</p>
+              </details>
+              <button class="primary-btn" id="check3" type="button">Comprobar clasificación</button>
+              <button class="primary-btn" id="next3" type="button" hidden>Continuar →</button>
+            </div>
+          </section>
+
+          <section class="stage-panel" id="stage4" aria-labelledby="s4title">
+            <div class="panel-banner">
+              <div class="panel-icon" style="background:var(--coral)" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5.8A2.8 2.8 0 0 1 6.8 3H20v16H6.8A2.8 2.8 0 0 0 4 21.8"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+              </div>
+              <div><strong>El conocimiento necesita distintas formas de salir.</strong><p>Vas a resolver este desafío en tres pasos separados: primero elegir cómo demostrar lo aprendido, después orientar con feedback y, por último, favorecer la autorregulación.</p></div>
+            </div>
+
+            <div class="expression-progress" aria-label="Progreso del desafío de expresión">
+              <span class="stepper-label" id="expressionStepLabel">Paso 1 de 3</span>
+              <div class="progress-line"><span id="expressionProgressFill"></span></div>
+            </div>
+
+            <div class="expression-step active" id="expressionStep1">
+              <div class="expression-step-heading">
+                <span class="expression-step-number">1</span>
+                <div><h4 id="s4title">Elegí cómo pueden demostrar lo que aprendieron</h4><p>El grupo estudió el ciclo del agua. Seleccioná al menos dos formas diferentes para que puedan explicar lo que comprendieron.</p></div>
+              </div>
+
+              <div class="visual-pillars">
+                <div class="pillar">
+                  <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1"/></svg></div>
+                  <strong>Oral</strong><p>Explicar con voz propia o grabar un audio.</p>
+                </div>
+                <div class="pillar">
+                  <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m6 16 4-4 3 3 2-2 3 3"/></svg></div>
+                  <strong>Gráfica</strong><p>Crear un dibujo, mapa o infografía.</p>
+                </div>
+                <div class="pillar">
+                  <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8"/></svg></div>
+                  <strong>Manipulativa</strong><p>Construir una maqueta o hacer una demostración.</p>
+                </div>
+                <div class="pillar">
+                  <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></div>
+                  <strong>Escrita</strong><p>Redactar una explicación breve y organizada.</p>
+                </div>
+              </div>
+
+              <div class="criterion-card"><strong>El criterio de aprendizaje se mantiene</strong>En cualquier formato, el estudiante debe ordenar al menos tres momentos del ciclo del agua y explicar una relación con una situación cotidiana.</div>
+
+              <div class="format-grid" id="formatGrid">
+                <button class="format-btn" type="button" data-expression="oral" aria-pressed="false">
+                  <span class="format-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v3M8 21h8"/></svg></span>
+                  <strong>Audio o explicación oral</strong><small>Contar el proceso con palabras propias.</small>
+                </button>
+                <button class="format-btn" type="button" data-expression="grafica" aria-pressed="false">
+                  <span class="format-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m6 16 4-4 3 3 2-2 3 3M8 8h.01"/></svg></span>
+                  <strong>Dibujo o infografía</strong><small>Representar las etapas y sus relaciones.</small>
+                </button>
+                <button class="format-btn" type="button" data-expression="modelo" aria-pressed="false">
+                  <span class="format-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8M12 13v9"/></svg></span>
+                  <strong>Maqueta o demostración</strong><small>Construir o representar el fenómeno.</small>
+                </button>
+                <button class="format-btn" type="button" data-expression="escrito" aria-pressed="false">
+                  <span class="format-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></span>
+                  <strong>Texto breve</strong><small>Escribir una explicación organizada.</small>
+                </button>
+              </div>
+              <div class="feedback-box" id="formatFeedback" role="status" aria-live="polite">Seleccioná al menos dos opciones. Todas pueden estar disponibles para el grupo; no hace falta asignar una forma a cada estudiante.</div>
+              <div class="expression-step-actions">
+                <span class="action-note">Paso 1 · Formas de expresión</span>
+                <button class="primary-btn" id="next4a" type="button">Siguiente: feedback →</button>
+              </div>
+            </div>
+
+            <div class="expression-step" id="expressionStep2">
+              <div class="expression-step-heading">
+                <span class="expression-step-number">2</span>
+                <div><h4>Elegí una devolución que ayude a avanzar</h4><p>Una estudiante dice: «No me sale. Creo que está todo mal». ¿Qué respuesta reconoce un avance y le ofrece una pista para continuar?</p></div>
+              </div>
+              <div class="feedback-situation">
+                <div class="quote-icon">“</div>
+                <div><strong>La voz de una estudiante</strong><p>«No me sale. Creo que está todo mal».</p></div>
+              </div>
+              <div class="feedback-options" id="feedbackOptions">
+                <button class="feedback-option" type="button" data-feedback="process" aria-pressed="false">
+                  <strong>Opción A · Orientar el proceso</strong>
+                  Ya identificaste que el sol calienta el agua. Revisá la secuencia: ¿qué sucede después? Podés usar las imágenes o el modelo para comprobarlo.
+                </button>
+                <button class="feedback-option" type="button" data-feedback="answer" aria-pressed="false">
+                  <strong>Opción B · Dar la respuesta</strong>
+                  Está mal. Copiá la explicación del libro y volvé a entregarla.
+                </button>
+                <button class="feedback-option" type="button" data-feedback="praise" aria-pressed="false">
+                  <strong>Opción C · Elogiar sin orientar</strong>
+                  ¡Está todo perfecto! No cambies nada.
+                </button>
+              </div>
+              <div class="feedback-box" id="feedbackStepMessage" role="status" aria-live="polite">Elegí la devolución que permite reconocer un progreso y saber cuál puede ser el siguiente paso.</div>
+              <div class="expression-step-actions">
+                <button class="secondary-btn" id="back4b" type="button">← Volver</button>
+                <span class="action-note">Paso 2 · Feedback para aprender</span>
+                <button class="primary-btn" id="next4b" type="button">Siguiente: autorregular →</button>
+              </div>
+            </div>
+
+            <div class="expression-step" id="expressionStep3">
+              <div class="expression-step-heading">
+                <span class="expression-step-number">3</span>
+                <div><h4>Ayudá a que pueda revisar su propio aprendizaje</h4><p>La autorregulación invita a reconocer qué se logró, qué apoyo sirvió y qué conviene hacer después.</p></div>
+              </div>
+              <div class="feedback-situation">
+                <div class="quote-icon">?</div>
+                <div><strong>Ahora la docente quiere que la estudiante revise su propio trabajo.</strong><p>¿Qué pregunta le permitiría pensar sobre su proceso y decidir cómo continuar?</p></div>
+              </div>
+              <div class="feedback-options" id="regOptions">
+                <button class="feedback-option" type="button" data-reg="yes" aria-pressed="false">
+                  <strong>Opción A · Mirar el propio proceso</strong>
+                  ¿Qué parte ya resolviste, qué apoyo te sirvió y qué paso revisarías?
+                </button>
+                <button class="feedback-option" type="button" data-reg="no" aria-pressed="false">
+                  <strong>Opción B · Compararse con otros</strong>
+                  ¿Quién terminó primero y quién todavía no entregó?
+                </button>
+              </div>
+              <div class="feedback-box" id="regFeedback" role="status" aria-live="polite">Elegí la pregunta que favorece la reflexión y la toma de decisiones.</div>
+              <div class="feedback-box" id="expressionFeedback" role="status" aria-live="polite">Cuando completes este paso, vas a poder validar tu propuesta.</div>
+              <div class="expression-step-actions">
+                <button class="secondary-btn" id="back4c" type="button">← Volver</button>
+                <span class="action-note">Paso 3 · Autorregulación</span>
+                <button class="primary-btn" id="check4" type="button">Validar propuesta</button>
+                <button class="primary-btn" id="next4" type="button" hidden>Ir a la reflexión →</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="stage-panel" id="stage5" aria-labelledby="s5title">
+            <div class="finish-banner">
+              <div><h3 id="s5title">¡Misión cumplida!</h3><p>Ya abriste caminos para que el grupo pueda acceder, participar y demostrar lo que aprende.</p></div>
+              <div class="finish-score"><strong id="finalKeys">4/4</strong><span>llaves activadas</span></div>
+            </div>
+            <div class="reflection-grid">
+              <aside class="reflection-aside">
+                <div class="seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L4.8 8.2l5-.7L12 3Z"/></svg></div>
+                <h3>Tu próxima clase puede empezar con una pregunta distinta.</h3>
+                <p>En lugar de preguntarte qué le falta a cada estudiante, observá qué barreras puede estar generando la propuesta y qué opciones podés anticipar.</p>
+                <div class="key-list">
+                  <div class="key-row"><span class="key-dot">1</span> Conocer las fortalezas y barreras del grupo.</div>
+                  <div class="key-row"><span class="key-dot">2</span> Diseñar opciones de acceso e implicación.</div>
+                  <div class="key-row"><span class="key-dot">3</span> Proponer distintas formas de procesar y expresar.</div>
+                  <div class="key-row"><span class="key-dot">4</span> Observar, dar feedback y ajustar.</div>
+                </div>
+              </aside>
+              <div class="reflection-form">
+                <div class="instruction-line"><h3>Armá tu mini Canvas de salida</h3><span class="small-counter">Para llevar al aula</span></div>
+                <div class="instruction-note"><strong>Una participación por correo electrónico:</strong> usá tu correo habitual. El sistema lo toma como identificador único y no permite enviar dos registros con la misma dirección.</div>
+                <div class="field">
+                  <label for="participantEmail">Correo electrónico</label>
+                  <span class="field-help">Es el correo que validaste antes de comenzar. Se utiliza solamente como identificador único de participación.</span>
+                  <input id="participantEmail" type="email" maxlength="254" autocomplete="email" inputmode="email" placeholder="nombre@correo.com" readonly required>
+                </div>
+                <div class="field">
+                  <label for="participantName">Nombre y apellido</label>
+                  <span class="field-help">Este dato aparecerá junto con tus respuestas en la planilla de la capacitación.</span>
+                  <input id="participantName" type="text" maxlength="120" autocomplete="name" placeholder="Escribí tu nombre y apellido" required>
+                </div>
+                <div class="field">
+                  <label for="barrierSelect">1. ¿Qué barrera querés revisar primero?</label>
+                  <span class="field-help">Elegí la dimensión que te gustaría revisar en tu práctica.</span>
+                  <select id="barrierSelect" required>
+                    <option value="">Elegí una dimensión</option>
+                    <option value="Física: desplazamiento y manipulación">Física: desplazamiento y manipulación</option>
+                    <option value="Sensorial: acceso a la información">Sensorial: acceso a la información</option>
+                    <option value="Cognitiva: comprensión y organización">Cognitiva: comprensión y organización</option>
+                    <option value="Emocional: seguridad y pertenencia">Emocional: seguridad y pertenencia</option>
+                    <option value="Varias dimensiones a la vez">Varias dimensiones a la vez</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="changeInput">2. ¿Qué cambio concreto implementarías?</label>
+                  <span class="field-help">Pensá en una decisión que puedas poner en práctica en una actividad próxima.</span>
+                  <textarea id="changeInput" maxlength="2000" placeholder="Voy a ofrecer... / Voy a reorganizar... / Voy a permitir que..." required></textarea>
+                </div>
+                <div class="field">
+                  <label for="evidenceInput">3. ¿Qué observarías para saber si funcionó?</label>
+                  <span class="field-help">Buscá evidencias de presencia, participación y aprendizaje.</span>
+                  <textarea id="evidenceInput" maxlength="2000" placeholder="Me voy a dar cuenta porque..." required></textarea>
+                </div>
+                <div class="field">
+                  <label for="reflectionInput">4. Una idea que me llevo</label>
+                  <textarea id="reflectionInput" maxlength="2000" placeholder="Diseñar para la diversidad significa..." required></textarea>
+                </div>
+
+                <div class="sr-only" aria-hidden="true">
+                  <label for="website">No completar este campo</label>
+                  <input id="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="final-actions">
+                  <button class="primary-btn" id="sendBtn" type="button">Registrar mis respuestas</button>
+                  <button class="secondary-btn" id="downloadBtn" type="button">Descargar mi ficha</button>
+                  <button class="secondary-btn" id="copyBtn" type="button">Copiar respuestas</button>
+                </div>
+                <div class="feedback-box" id="submitFeedback" role="status" aria-live="polite">Al registrar tus respuestas, el correo se utilizará únicamente para comprobar que no hayas realizado la actividad anteriormente.</div>
+                <div class="feedback-box success" id="completionNotice" role="status" aria-live="polite" hidden></div>
+                <p class="privacy-note">Tu correo se usa solo para comprobar si ya completaste esta actividad. Tus respuestas, nombre y correo se guardan en la planilla de la capacitación, que debe mantenerse restringida a la coordinación. No se envían correos ni se solicitan datos de estudiantes.</p>
+              </div>
+            </div>
+            <div class="stage-actions">
+              <span class="action-note" id="elapsedFinal">Tiempo de recorrido: 00:00</span>
+              <span class="action-note">Guardá tus respuestas al terminar. No hay botón para repetir la misión.</span>
+            </div>
+            <div class="experience-cta">
+              <span class="experience-cta-question">¿Te gustó esta experiencia?</span>
+              <p class="experience-cta-intro">Soy Lucía, estudiante de Ingeniería en Sistemas, y me dedico a crear experiencias educativas digitales, interactivas y divertidas.</p>
+              <p class="experience-cta-offer">Si te gustaría tener una actividad como esta, adaptada a tus clases o capacitaciones, ¡me encantaría diseñarla para vos! 😊</p>
+              <a class="experience-cta-link" href="https://wa.me/5492634249750?text=Hola%2C%20Luc%C3%ADa.%20%C2%A1Me%20encant%C3%B3%20esta%20experiencia%21%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20las%20opciones%20para%20crear%20una%20actividad%20interactiva%20adaptada%20a%20mis%20clases%20o%20capacitaciones.%20%C2%BFPodr%C3%ADas%20contarme%20c%C3%B3mo%20ser%C3%ADa%20el%20proceso%3F%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+                Hace click acá.
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script defer src="./assets/js/config.js"></script>
+  <script defer src="./assets/js/app.js"></script>
+</body>
+</html>

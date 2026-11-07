@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 390">
+                <defs>
+                  <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67d4c2"/><stop offset="1" stop-color="#168f91"/></linearGradient>
+                  <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe38c"/><stop offset="1" stop-color="#f3b84e"/></linearGradient>
+                </defs>
+                <circle cx="220" cy="183" r="144" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-dasharray="5 10"/>
+                <circle cx="220" cy="183" r="108" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
+                <path d="M100 245c-17-21-17-49 0-68 18-21 50-21 69-4 12-29 41-46 72-39 25 6 42 26 45 51 29-4 55 18 55 48 0 27-22 49-49 49H137c-15 0-28-13-37-37Z" fill="url(#water)" opacity=".94"/>
+                <path d="M145 238c-12-15-10-35 2-47 12-12 32-14 46-4 10-20 29-31 51-26 18 4 30 19 33 36 21-3 39 12 39 33 0 19-16 34-35 34H169c-10 0-19-10-24-26Z" fill="#eafaf7"/>
+                <circle cx="327" cy="78" r="35" fill="url(#sun)"/>
+                <g stroke="#f3c85b" stroke-width="5" stroke-linecap="round">
+                  <path d="M327 25v-13M327 144v-13M274 78h-13M393 78h-13M289 40l-9-9M374 125l-9-9M365 40l9-9M280 125l9-9"/>
+                </g>
+                <path d="M176 282c-12 24-12 37 0 45 12-8 12-21 0-45Z" fill="#62d6c4"/>
+                <path d="M220 286c-12 24-12 37 0 45 12-8 12-21 0-45Z" fill="#62d6c4"/>
+                <path d="M264 282c-12 24-12 37 0 45 12-8 12-21 0-45Z" fill="#62d6c4"/>
+                <path d="M120 327c35-18 70-18 105 0s70 18 105 0" stroke="#78d3bd" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <path d="M220 327v31M220 344c-25-20-39-17-47-3 18 12 34 13 47 3ZM220 344c23-22 40-19 48-5-16 14-32 17-48 5Z" fill="#4fc09f"/>
+                <path d="M91 115c-12 18-12 29 0 36 12-7 12-18 0-36Z" fill="#ff9a83"/>
+                <path d="M360 223c-10 15-10 25 0 31 10-6 10-16 0-31Z" fill="#ff9a83"/>
+                <circle cx="110" cy="300" r="7" fill="#f3c85b"/>
+                <circle cx="335" cy="290" r="5" fill="#f3c85b"/>
+              </svg>
