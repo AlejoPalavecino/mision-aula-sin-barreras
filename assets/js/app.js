@@ -353,94 +353,6 @@ const $ = (selector, root = document) => root.querySelector(selector);
 
     $("#next4").addEventListener("click", () => showStage(5));
 
-    function buildSummary() {
-      const participantName = $("#participantName").value.trim() || "Sin nombre";
-      const participantEmail = $("#participantEmail").value.trim().toLowerCase() || "Sin correo";
-      const barrier = $("#barrierSelect").value || "No especificada";
-      const change = $("#changeInput").value.trim() || "Pendiente de completar";
-      const evidence = $("#evidenceInput").value.trim() || "Pendiente de completar";
-      const reflection = $("#reflectionInput").value.trim() || "Pendiente de completar";
-      const formatNames = { oral: "Explicación oral o audio", grafica: "Dibujo, mapa o infografía", modelo: "Maqueta o demostración", escrito: "Texto breve" };
-      const accessNames = {
-        a1: "Para Emi: texto ampliado, imágenes visibles y explicación oral",
-        a2: "Para Tomi: consigna dividida en pasos y secuencia visual",
-        a3: "Para Alma: participación gradual, primero en pareja",
-        a4: "Para Bruno: espacio despejado y materiales al alcance",
-        a5: "Mantener una ficha extensa con texto pequeño",
-        a6: "Agregar estímulos simultáneos y sin organizar"
-      };
-      const processNames = {
-        c1: "Comparar dos charcos y explicar qué ocurre",
-        c2: "Copiar una definición sin aplicarla",
-        c3: "Ordenar imágenes y justificar el orden",
-        c4: "Memorizar palabras sin relacionarlas"
-      };
-      return [
-        "MISIÓN AULA SIN BARRERAS — FICHA DE DISEÑO",
-        `Tiempo de recorrido: ${formatTime(elapsedSeconds)}`,
-        `Participante: ${participantName}`,
-        `Correo electrónico: ${participantEmail}`,
-        "",
-        "1. BARRERAS IDENTIFICADAS",
-        "Emi: sensorial | Tomi: cognitiva | Alma: emocional | Bruno: física",
-        "",
-        "2. DECISIONES DE ACCESO",
-        ...Array.from(selectedAccess).map(key => `- ${accessNames[key]}`),
-        "",
-        "3. CLASIFICACIÓN DEL PROCESAMIENTO",
-        ...Array.from(processClassifications.entries()).map(([key, value]) => `- ${processNames[key]}: ${value === "procesa" ? "ayuda a pensar" : "solo repite"}`),
-        "",
-        "4. FORMAS DE EXPRESIÓN",
-        ...Array.from(selectedFormats).map(key => `- ${formatNames[key]}`),
-        "Feedback elegido: orientación sobre el proceso",
-        "Autorregulación: revisar logros, apoyos y próximo paso",
-        "",
-        "5. MI MINI CANVAS",
-        `Barrera que quiero revisar: ${barrier}`,
-        `Cambio concreto: ${change}`,
-        `Evidencia que observaré: ${evidence}`,
-        `Idea que me llevo: ${reflection}`,
-        "",
-        "IDEA CLAVE",
-        "Diseñar para la diversidad significa anticipar barreras y ofrecer opciones para que todo el grupo pueda acceder, implicarse, procesar y expresar lo aprendido, con objetivos y criterios claros.",
-        "",
-        "Base conceptual: Diseño Universal y Aprendizaje Accesible. Modelo DUA-A, Generalitat Valenciana."
-      ].join("\n");
-    }
-
-    $("#downloadBtn").addEventListener("click", () => {
-      const content = buildSummary();
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "mi-ficha-mision-aula-sin-barreras.txt";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-
-    $("#copyBtn").addEventListener("click", async () => {
-      const content = buildSummary();
-      const button = $("#copyBtn");
-      try {
-        await navigator.clipboard.writeText(content);
-        button.textContent = "¡Copiado!";
-      } catch (error) {
-        const temp = document.createElement("textarea");
-        temp.value = content;
-        temp.style.position = "fixed";
-        temp.style.opacity = "0";
-        document.body.appendChild(temp);
-        temp.select();
-        try { document.execCommand("copy"); button.textContent = "¡Copiado!"; }
-        catch (e) { button.textContent = "No se pudo copiar"; }
-        temp.remove();
-      }
-      setTimeout(() => button.textContent = "Copiar respuestas", 1800);
-    });
-
     // Conexión con Google Sheets: URL de implementación configurada.
     const GOOGLE_APPS_SCRIPT_URL = window.AULA_CONFIG.appsScriptUrl;
 
@@ -503,6 +415,26 @@ const $ = (selector, root = document) => root.querySelector(selector);
       $("#completionNotice").textContent = message;
     }
 
+    const successModal = $("#successModal");
+    const closeSuccessModal = $("#closeSuccessModal");
+
+    function openSuccessModal() {
+      if (typeof successModal.showModal === "function") {
+        successModal.showModal();
+      } else {
+        successModal.setAttribute("open", "");
+        closeSuccessModal.focus();
+      }
+    }
+
+    closeSuccessModal.addEventListener("click", () => {
+      if (typeof successModal.close === "function") {
+        successModal.close();
+      } else {
+        successModal.removeAttribute("open");
+      }
+    });
+
     function verifySheetSubmission(requestId) {
       return new Promise(resolve => {
         const callbackName = `misionAulaCallback_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
@@ -548,6 +480,7 @@ const $ = (selector, root = document) => root.querySelector(selector);
         if (status === "saved") {
           setSubmitMessage("¡Listo! Tus respuestas quedaron guardadas correctamente. Tu correo se utilizó únicamente para evitar duplicados.", "success");
           lockCompletedForm("¡Gracias por participar! Tu actividad quedó completada. Esta experiencia admite una sola participación por dirección de correo electrónico.");
+          openSuccessModal();
         } else if (status === "duplicate") {
           setSubmitMessage("Este correo ya figura como participante. La actividad se completa una sola vez por dirección de correo electrónico.", "error");
           button.disabled = false;

@@ -548,8 +548,6 @@
 
                 <div class="final-actions">
                   <button class="primary-btn" id="sendBtn" type="button">Registrar mis respuestas</button>
-                  <button class="secondary-btn" id="downloadBtn" type="button">Descargar mi ficha</button>
-                  <button class="secondary-btn" id="copyBtn" type="button">Copiar respuestas</button>
                 </div>
                 <div class="feedback-box" id="submitFeedback" role="status" aria-live="polite">Al registrar tus respuestas, el correo se utilizará únicamente para comprobar que no hayas realizado la actividad anteriormente.</div>
                 <div class="feedback-box success" id="completionNotice" role="status" aria-live="polite" hidden></div>
@@ -560,9 +558,25 @@
               <span class="action-note" id="elapsedFinal">Tiempo de recorrido: 00:00</span>
               <span class="action-note">Guardá tus respuestas al terminar. No hay botón para repetir la misión.</span>
             </div>
+
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+
+  <dialog class="success-modal" id="successModal" aria-labelledby="successModalTitle" aria-describedby="successModalDescription">
+    <button type="button" class="success-modal-close" id="closeSuccessModal" aria-label="Cerrar ventana" title="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="success-modal-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+    </div>
+    <p class="success-modal-confirmation">¡Tu participación quedó registrada!</p>
             <div class="experience-cta">
-              <span class="experience-cta-question">¿Te gustó esta experiencia?</span>
-              <p class="experience-cta-intro">Soy Lucía, estudiante de Ingeniería en Sistemas, y me dedico a crear experiencias educativas digitales, interactivas y divertidas.</p>
+              <span class="experience-cta-question" id="successModalTitle">¿Te gustó esta experiencia?</span>
+              <p class="experience-cta-intro" id="successModalDescription">Soy Lucía, estudiante de Ingeniería en Sistemas, y me dedico a crear experiencias educativas digitales, interactivas y divertidas.</p>
               <p class="experience-cta-offer">Si te gustaría tener una actividad como esta, adaptada a tus clases o capacitaciones, ¡me encantaría diseñarla para vos! 😊</p>
               <a class="experience-cta-link" href="https://wa.me/5492634249750?text=Hola%2C%20Luc%C3%ADa.%20%C2%A1Me%20encant%C3%B3%20esta%20experiencia%21%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20las%20opciones%20para%20crear%20una%20actividad%20interactiva%20adaptada%20a%20mis%20clases%20o%20capacitaciones.%20%C2%BFPodr%C3%ADas%20contarme%20c%C3%B3mo%20ser%C3%ADa%20el%20proceso%3F%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -571,11 +585,7 @@
                 Hace click acá.
               </a>
             </div>
-          </section>
-        </div>
-      </section>
-    </main>
-  </div>
+  </dialog>
 
   <script defer src="./assets/js/config.js"></script>
   <script defer src="./assets/js/app.js"></script>

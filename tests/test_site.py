@@ -59,6 +59,27 @@ class PagesSiteTests(unittest.TestCase):
         self.assertIn('wa.me/5492634249750', HTML)
         self.assertIn('Hace click acá', HTML)
 
+    def test_success_modal_only_after_confirmed_saved(self):
+        self.assertIn('<dialog class="success-modal" id="successModal"', HTML)
+        self.assertIn('id="closeSuccessModal"', HTML)
+        self.assertIn('id="successModalTitle"', HTML)
+        self.assertIn('function openSuccessModal()', JS)
+        self.assertIn('successModal.showModal()', JS)
+        self.assertIn('closeSuccessModal.addEventListener("click"', JS)
+        import re
+        success_branch = re.search(r'if \(status === "saved"\) \{(?P<body>.*?)\} else if', JS, re.S)
+        self.assertIsNotNone(success_branch)
+        self.assertIn('lockCompletedForm', success_branch.group('body'))
+        self.assertIn('openSuccessModal();', success_branch.group('body'))
+        self.assertEqual(JS.count('openSuccessModal();'), 1)
+
+    def test_no_download_or_copy_controls(self):
+        for token in ('id="downloadBtn"', 'id="copyBtn"', 'Descargar mi ficha', 'Copiar respuestas'):
+            self.assertNotIn(token, HTML)
+        for token in ('#downloadBtn', '#copyBtn', 'buildSummary(', 'navigator.clipboard.writeText'):
+            self.assertNotIn(token, JS)
+        self.assertIn('id="sendBtn"', HTML)
+
     def test_duplicate_dom_ids(self):
         ids = re.findall(r'\bid="([^"]+)"', HTML)
         self.assertEqual(len(ids), len(set(ids)))
