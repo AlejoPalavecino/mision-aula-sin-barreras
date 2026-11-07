@@ -8,7 +8,7 @@ Desde la planilla, elegir **Compartir → Acceso general → Restringido**. La p
 
 ## 2. Apps Script
 
-Desde la planilla abrir **Extensiones → Apps Script**. En `Code.gs`, utilizar el archivo del servidor **V8 (registro único, sin envío de correos)** entregado a la coordinación por separado, nunca dentro de este repositorio público.
+Desde la planilla abrir **Extensiones → Apps Script**. En `Code.gs`, utilizar el archivo del servidor **V9 (registro único, sin envío de correos)** entregado a la coordinación por separado, nunca dentro de este repositorio público.
 
 En **Implementar → Gestionar implementaciones**, editar la aplicación web actual:
 
