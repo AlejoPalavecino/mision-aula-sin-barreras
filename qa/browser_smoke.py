@@ -5,6 +5,8 @@ from pathlib import Path
 import json
 import re
 import base64
+import tempfile
+import shutil
 from urllib.parse import parse_qs, urlparse
 from playwright.sync_api import sync_playwright
 
@@ -79,9 +81,7 @@ def run():
     html = html.replace('<script defer src="./assets/js/app.js"></script>', '<script>'+js+'</script>')
     html = html.replace('src="./assets/img/hero-water-cycle.svg"', 'src="data:image/svg+xml;base64,'+base64.b64encode(svg).decode()+'"')
     with sync_playwright() as pw:
-        import shutil
-        import shutil
-        browser_executable = shutil.which('chromium') or shutil.which('google-chrome')
+        browser_executable = shutil.which('chromium') or shutil.which('google-chrome') or pw.chromium.executable_path
         browser = pw.chromium.launch(executable_path=browser_executable, headless=True, args=['--no-sandbox','--disable-dev-shm-usage'])
         page = browser.new_page(viewport={"width": 1400, "height": 900}, device_scale_factor=1)
         page.set_default_timeout(6000)
@@ -90,7 +90,9 @@ def run():
         page.set_content(html, wait_until='domcontentloaded')
         inject_bridge(page)
         page.wait_for_timeout(500)
-        page.screenshot(path='/mnt/data/aula_pages_home.png', full_page=True)
+        screenshots = Path(tempfile.gettempdir()) / 'aula-sin-barreras-qa'
+        screenshots.mkdir(exist_ok=True)
+        page.screenshot(path=str(screenshots / 'aula_pages_home.png'), full_page=True)
         assert page.locator('#startEmail').count() == 1
         assert page.locator('#clock').inner_text() == '00:00'
         page.locator('#startEmail').fill('Docente.Prueba@Example.com')
@@ -140,7 +142,17 @@ def run():
         assert response['email'] == 'docente.prueba@example.com'
         assert 'guardad' in page.locator('#submitFeedback').inner_text().lower()
         assert not page.locator('#sendBtn').is_enabled()
-        page.screenshot(path='/mnt/data/aula_pages_final.png', full_page=True)
+        assert page.locator('#successModal:visible').is_visible(), 'La ventana de éxito debe abrirse al guardar'
+        assert page.locator('#successModalTitle').inner_text() == '¿Te gustó esta experiencia?'
+        whatsapp = page.locator('#successModal a.experience-cta-link')
+        assert whatsapp.is_visible(), 'La CTA de WhatsApp debe ser visible en el modal'
+        assert whatsapp.get_attribute('href').startswith('https://wa.me/5492634249750?text=')
+        assert page.locator('#downloadBtn').count() == 0
+        assert page.locator('#copyBtn').count() == 0
+        page.screenshot(path=str(screenshots / 'aula_pages_final.png'), full_page=True)
+        page.locator('#closeSuccessModal').click()
+        assert not page.locator('#successModal').is_visible(), 'El modal debe poder cerrarse'
+        assert not page.locator('#sendBtn').is_enabled(), 'El formulario no debe reabrirse al cerrar el modal'
 
         # Fresh tab with same email must be blocked by backend.
         print('FIRST PASS OK', flush=True)
@@ -149,7 +161,7 @@ def run():
         other.set_content(html, wait_until='domcontentloaded')
         inject_bridge(other)
         other.wait_for_timeout(500)
-        other.screenshot(path='/mnt/data/aula_pages_mobile.png', full_page=True)
+        other.screenshot(path=str(screenshots / 'aula_pages_mobile.png'), full_page=True)
         print('MOBILE LOADED',flush=True)
         other.locator('#startEmail').fill('docente.prueba@example.com')
         other.locator('#startBtn').click()

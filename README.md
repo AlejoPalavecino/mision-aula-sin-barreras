@@ -34,6 +34,10 @@ Una vez creado el repositorio y habilitado GitHub Pages:
 
 El sitio es estático y no requiere servidor propio. Los datos se reciben mediante un Google Apps Script desplegado de forma independiente.
 
+## Experiencia de cierre
+
+La invitación «¿Te gustó esta experiencia?» se muestra en una **ventana modal cerrable únicamente cuando Google Apps Script confirma que el registro se guardó** (`status: saved`). La pantalla final conserva un solo botón de envío; no incluye descarga ni copia de respuestas. Si el registro falla, no se muestra la ventana ni se bloquea el envío permanentemente. El enlace de WhatsApp dirige al mensaje preescrito de Lucía.
+
 ## Privacidad y seguridad
 
 - **Nunca subir `Code.gs`, una hoja de cálculo, un token, contraseñas ni datos de docentes a este repositorio público.**

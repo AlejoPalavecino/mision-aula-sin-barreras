@@ -891,3 +891,84 @@ p, li, label, select, textarea, button { line-height: 1.6; }
 #startEmailFeedback { max-width: 520px; margin: 10px 0 14px; font-size: 13px; }
 #startBtn { margin-top: 2px; }
 #participantEmail[readonly] { background: #f3f6fa; color: #52627b; }
+
+
+/* Diálogo posterior al guardado confirmado. No aparece en fallos ni duplicados. */
+.success-modal {
+  width: min(94vw, 600px);
+  max-height: min(90dvh, 850px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 30px 24px 24px;
+  border: 1px solid #f0d8cd;
+  border-radius: 24px;
+  background: #fffdf8;
+  color: #172849;
+  box-shadow: 0 25px 80px rgba(23, 40, 73, .25);
+  text-align: center;
+  position: fixed;
+}
+.success-modal::backdrop { background: rgba(17, 31, 57, .7); backdrop-filter: blur(4px); }
+.success-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dce3ef;
+  border-radius: 50%;
+  background: white;
+  color: #344663;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease;
+}
+.success-modal-close:hover { background: #eff4fa; }
+.success-modal-close svg { width: 19px; height: 19px; }
+.success-modal-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: #176b58;
+  background: #dff4ed;
+}
+.success-modal-icon svg { width: 28px; height: 28px; }
+.success-modal-confirmation {
+  margin: 0 0 14px;
+  color: #176b58;
+  font-size: 16px !important;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.success-modal .experience-cta {
+  margin: 0;
+  border: 0;
+  padding: 14px 5px 0;
+  background: none;
+}
+.success-modal .experience-cta-link {
+  display: inline-flex;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 18px;
+  margin-top: 8px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff705b, #f45d50);
+  color: white;
+  font-size: 16px !important;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(244, 93, 80, .22);
+}
+.success-modal .experience-cta-link:hover { color: white; background: #d94d42; }
+.success-modal .experience-cta-link:focus-visible,
+.success-modal-close:focus-visible { outline: 3px solid #f3c85b; outline-offset: 3px; }
+@media(max-width: 600px) {
+  .success-modal { width: calc(100vw - 24px); padding: 25px 13px 18px; border-radius: 20px; }
+  .success-modal .experience-cta { padding-top: 12px; }
+  .success-modal .experience-cta-link { width: 100%; }
+}
